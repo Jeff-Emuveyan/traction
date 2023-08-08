@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">traction</string>
+    <string name="error_message">Network Error, tap here to try again</string>
+</resources>
