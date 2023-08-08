@@ -28,6 +28,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
@@ -35,6 +37,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.example.common.model.Movie
 import com.example.movies.R
+import com.example.movies.util.MoviePreviewParameter
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -80,8 +83,8 @@ internal fun MovieList(listState: LazyListState, lazyPagingItems: LazyPagingItem
 }
 
 @Composable
-//@Preview(showBackground = true, showSystemUi = true)
-internal fun Movie(movie: Movie) {
+@Preview(showBackground = true, showSystemUi = true)
+internal fun Movie(@PreviewParameter(MoviePreviewParameter::class) movie: Movie) {
     Column {
         AsyncImage(
             contentScale = ContentScale.FillWidth,
@@ -91,7 +94,7 @@ internal fun Movie(movie: Movie) {
             placeholder = painterResource(R.drawable.image_24)
         )
         Column(modifier = Modifier.padding(8.0.dp)) {
-            Text(text = movie.title, style = MaterialTheme.typography.headlineLarge)
+            Text(text = movie.title, style = MaterialTheme.typography.titleLarge )
             Text(text = movie.releaseDate)
             Text(text = movie.overview, textAlign = TextAlign.Justify, modifier = Modifier.padding(top = 8.0.dp))
 
