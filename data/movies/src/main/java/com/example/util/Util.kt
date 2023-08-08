@@ -4,7 +4,6 @@ import com.example.database.entities.MovieEntity
 import com.example.network.movies.model.MovieResponse
 
 fun MovieResponse.toEntity(pageNumber: Int): MovieEntity {
-
     return MovieEntity(title, overview, posterUrl, releaseDate, pageNumber)
 }
 

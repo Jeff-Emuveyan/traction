@@ -14,33 +14,24 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class LocalDataSourceModuleImpl @Inject constructor(private val localDataSource: LocalDataSource): ILocalDataSource {
-
     override fun database(): AppDatabase {
         return localDataSource.database()
     }
 
-    override fun insertAll(users: List<MovieEntity>) {
-        localDataSource.insertAll(users)
+    override fun insert(users: List<MovieEntity>) {
+        localDataSource.insert(users)
     }
 
-    override fun pagingSource(query: Int): PagingSource<Int, MovieEntity> {
-        return localDataSource.pagingSource(query)
+    override fun insert(remoteKey: MovieEntityRemoteKey) {
+        localDataSource.insert(remoteKey)
     }
 
     override fun getAll(): PagingSource<Int, MovieEntity> {
         return localDataSource.getAll()
     }
 
-    override fun clearAll() {
-        localDataSource.clearAll()
-    }
-
-    override fun insertOrReplace(remoteKey: MovieEntityRemoteKey) {
-        localDataSource.insertOrReplace(remoteKey)
-    }
-
-    override fun remoteKeyByQuery(pageNumber: Int): Single<MovieEntityRemoteKey> {
-        return localDataSource.remoteKeyByQuery(pageNumber)
+    override fun getRemoteKey(pageNumber: Int): Single<MovieEntityRemoteKey> {
+        return localDataSource.getRemoteKey(pageNumber)
     }
 
     override fun deleteAll() {

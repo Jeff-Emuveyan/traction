@@ -14,5 +14,5 @@ class MoviesScreenViewModel @Inject constructor(private val repository: IMoviesR
     private val _uiState = MutableStateFlow<MoviesScreenUiState>(MoviesScreenUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    fun getMovies(pageNumber: Int) = repository.getMovies(pageNumber)
+    fun getMovies() = repository.getMovies()
 }

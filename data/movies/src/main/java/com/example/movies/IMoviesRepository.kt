@@ -5,5 +5,5 @@ import com.example.database.entities.MovieEntity
 
 interface IMoviesRepository {
 
-    fun getMovies(pageNumber: Int): Pager<Int, MovieEntity>
+    fun getMovies(): Pager<Int, MovieEntity>
 }

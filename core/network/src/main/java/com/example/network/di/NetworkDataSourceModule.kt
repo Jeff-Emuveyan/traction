@@ -1,7 +1,7 @@
 package com.example.network.di
 
-import com.example.network.movies.IMoviesNetworkDataSource
-import com.example.network.movies.MoviesNetworkDataSource
+import com.example.network.INetworkDataSource
+import com.example.network.NetworkDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class NetworkDataSourceModule {
     @Binds
-    abstract fun bindIMovieNetworkDataSource(networkDataSource: MoviesNetworkDataSource): IMoviesNetworkDataSource
+    abstract fun bindIMovieNetworkDataSource(networkDataSource: NetworkDataSource): INetworkDataSource
 
 }

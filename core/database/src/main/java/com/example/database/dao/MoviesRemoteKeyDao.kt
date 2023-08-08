@@ -11,10 +11,10 @@ import io.reactivex.Single
 interface MoviesRemoteKeyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrReplace(remoteKey: MovieEntityRemoteKey)
+    fun insert(remoteKey: MovieEntityRemoteKey)
 
     @Query("SELECT * FROM movies_remote_keys WHERE pageNumber = :pageNumber")
-    fun remoteKeyByQuery(pageNumber: Int): Single<MovieEntityRemoteKey>
+    fun getRemoteKey(pageNumber: Int): Single<MovieEntityRemoteKey>
 
     @Query("DELETE FROM movies_remote_keys")
     fun deleteAll()

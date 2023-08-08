@@ -13,8 +13,8 @@ import javax.inject.Inject
 class RepositoryModuleImpl @Inject constructor (private val repository: MoviesRepository):
     IMoviesRepository {
 
-    override fun getMovies(pageNumber: Int): Pager<Int, MovieEntity> {
-        return repository.getMovies(pageNumber)
+    override fun getMovies(): Pager<Int, MovieEntity> {
+        return repository.getMovies()
     }
 }
 

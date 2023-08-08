@@ -11,16 +11,10 @@ import com.example.database.entities.MovieEntity
 interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(users: List<MovieEntity>)
-
-    @Query("SELECT * FROM movies WHERE pageNumber LIKE :query")
-    fun pagingSource(query: Int): PagingSource<Int, MovieEntity>
+    fun insert(users: List<MovieEntity>)
 
     @Query("SELECT * FROM movies")
     fun getAll(): PagingSource<Int, MovieEntity>
-
-    @Query("DELETE FROM movies")
-    fun clearAll()
 
     @Query("DELETE FROM movies")
     fun deleteAll()

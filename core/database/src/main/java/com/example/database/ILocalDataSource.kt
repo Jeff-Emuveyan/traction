@@ -9,17 +9,13 @@ interface ILocalDataSource {
 
     fun database(): AppDatabase
 
-    fun insertAll(users: List<MovieEntity>)
+    fun insert(users: List<MovieEntity>)
 
-    fun pagingSource(query: Int): PagingSource<Int, MovieEntity>
+    fun insert(remoteKey: MovieEntityRemoteKey)
 
     fun getAll(): PagingSource<Int, MovieEntity>
 
-    fun clearAll()
-
-    fun insertOrReplace(remoteKey: MovieEntityRemoteKey)
-
-    fun remoteKeyByQuery(pageNumber: Int): Single<MovieEntityRemoteKey>
+    fun getRemoteKey(pageNumber: Int): Single<MovieEntityRemoteKey>
 
     fun deleteAll()
 }
