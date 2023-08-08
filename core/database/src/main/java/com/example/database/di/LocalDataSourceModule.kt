@@ -1,11 +1,11 @@
 package com.example.database.di
 
 import androidx.paging.PagingSource
+import com.example.common.entities.MovieEntity
+import com.example.common.entities.MovieEntityRemoteKey
 import com.example.database.AppDatabase
 import com.example.database.ILocalDataSource
 import com.example.database.LocalDataSource
-import com.example.database.entities.MovieEntity
-import com.example.database.entities.MovieEntityRemoteKey
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

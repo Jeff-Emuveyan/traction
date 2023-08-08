@@ -1,7 +1,7 @@
 package com.example.di
 
 import androidx.paging.Pager
-import com.example.database.entities.MovieEntity
+import com.example.common.entities.MovieEntity
 import com.example.movies.IMoviesRepository
 import com.example.movies.MoviesRepository
 import dagger.Binds

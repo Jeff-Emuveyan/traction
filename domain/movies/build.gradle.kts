@@ -1,12 +1,11 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.database"
+    namespace = "com.domain.movies"
     compileSdk = 33
 
     defaultConfig {
@@ -37,6 +36,7 @@ android {
 
 dependencies {
 
+    implementation(project(":data:movies"))
     implementation(project(":core:common"))
 
     implementation(libs.androidx.core)
@@ -50,15 +50,6 @@ dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
 
-    // room
-    implementation(libs.room.runtime)
-    kapt(libs.room.compiler)
-    // room paging
-    implementation(libs.room.paging)
-    // room rxjava 2
-    implementation(libs.room.rxjava2)
-    // room rxjava 3
-    implementation(libs.room.rxjava3)
-    // room test
-    testImplementation(libs.room.testing)
+    // Paging compose
+    implementation(libs.paging.compose)
 }

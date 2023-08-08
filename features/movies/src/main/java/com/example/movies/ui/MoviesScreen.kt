@@ -34,41 +34,32 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
-import com.example.database.entities.MovieEntity
+import com.example.common.model.Movie
 import com.example.movies.R
-import com.example.movies.model.MoviesScreenUiState
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MoviesScreen(viewModel: MoviesScreenViewModel = hiltViewModel()) {
 
     val listState = rememberLazyListState()
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    val movies = viewModel.getMovies().flow.collectAsLazyPagingItems()
+    val movies = viewModel.getMovies().collectAsLazyPagingItems()
 
-    val refreshing = uiState.value is MoviesScreenUiState.Loading
+    val refreshing = false
     val refreshingState = rememberPullRefreshState(refreshing, { })
 
-    MoviesScreen(movies, uiState.value, listState, refreshing, refreshingState) {}
+    MoviesScreen(movies, listState, refreshing, refreshingState) {}
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun MoviesScreen(
-    list: LazyPagingItems<MovieEntity>,
-    moviesScreenUiState: MoviesScreenUiState,
+    list: LazyPagingItems<Movie>,
     listState: LazyListState,
     refreshing: Boolean,
     refreshingState: PullRefreshState,
     onRetry:() -> Unit) {
 
     Box(modifier = Modifier.pullRefresh(refreshingState)) {
-
-        when (moviesScreenUiState) {
-            is MoviesScreenUiState.NetworkError -> { ErrorButton(onRetry) }
-            is MoviesScreenUiState.Success -> { MovieList(listState = listState, list)}
-            else -> {}
-        }
 
         PullRefreshIndicator(refreshing, refreshingState, modifier = Modifier
             .align(Alignment.TopCenter))
@@ -78,7 +69,7 @@ internal fun MoviesScreen(
 }
 
 @Composable
-internal fun MovieList(listState: LazyListState, lazyPagingItems: LazyPagingItems<MovieEntity>) {
+internal fun MovieList(listState: LazyListState, lazyPagingItems: LazyPagingItems<Movie>) {
     if (lazyPagingItems.itemCount > 0) {
         LazyColumn(state = listState) {
             items(count = lazyPagingItems.itemCount) { index ->
@@ -91,7 +82,7 @@ internal fun MovieList(listState: LazyListState, lazyPagingItems: LazyPagingItem
 
 @Composable
 //@Preview(showBackground = true, showSystemUi = true)
-internal fun Movie(movie: MovieEntity) {
+internal fun Movie(movie: Movie) {
     Column {
         AsyncImage(
             contentScale = ContentScale.FillWidth,
@@ -101,9 +92,9 @@ internal fun Movie(movie: MovieEntity) {
             placeholder = painterResource(R.drawable.image_24)
         )
         Column(modifier = Modifier.padding(8.0.dp)) {
-            Text(text = movie.title ?: "", style = MaterialTheme.typography.headlineLarge)
-            Text(text = movie.releaseDate ?: "")
-            Text(text = movie.overview ?: "", textAlign = TextAlign.Justify, modifier = Modifier.padding(top = 8.0.dp))
+            Text(text = movie.title, style = MaterialTheme.typography.headlineLarge)
+            Text(text = movie.releaseDate)
+            Text(text = movie.overview, textAlign = TextAlign.Justify, modifier = Modifier.padding(top = 8.0.dp))
 
             Divider(thickness = 1.dp, modifier = Modifier.padding(8.0.dp))
         }

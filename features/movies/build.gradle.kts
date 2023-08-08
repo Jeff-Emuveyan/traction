@@ -42,9 +42,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:movies"))
-    implementation(project(":core:database"))
-
+    implementation(project(":domain:movies"))
+    implementation(project(":core:common"))
 
     implementation(libs.viewmodel.lifcycle)
     implementation(libs.androidx.core)

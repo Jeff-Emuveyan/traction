@@ -1,6 +1,6 @@
 package com.example.util
 
-import com.example.database.entities.MovieEntity
+import com.example.common.entities.MovieEntity
 import com.example.network.movies.model.MovieResponse
 
 fun MovieResponse.toEntity(pageNumber: Int): MovieEntity {

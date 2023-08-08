@@ -5,8 +5,8 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.rxjava2.RxRemoteMediator
 import com.example.database.ILocalDataSource
-import com.example.database.entities.MovieEntity
-import com.example.database.entities.MovieEntityRemoteKey
+import com.example.common.entities.MovieEntity
+import com.example.common.entities.MovieEntityRemoteKey
 import com.example.network.INetworkDataSource
 import com.example.util.toEntity
 import io.reactivex.Single

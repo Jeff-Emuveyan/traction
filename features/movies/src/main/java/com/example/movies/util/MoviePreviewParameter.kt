@@ -1,11 +1,11 @@
 package com.example.movies.util
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.example.movies.model.Movie
+import com.example.common.model.Movie
 
 class MoviePreviewParameter: PreviewParameterProvider<Movie> {
 
     override val values: Sequence<Movie> = sequenceOf(
-        Movie(33,
+        Movie(
             "Lion King",
             "2023-04-01",
             "https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg",

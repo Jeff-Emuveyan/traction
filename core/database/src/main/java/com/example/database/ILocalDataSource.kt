@@ -1,8 +1,8 @@
 package com.example.database
 
 import androidx.paging.PagingSource
-import com.example.database.entities.MovieEntity
-import com.example.database.entities.MovieEntityRemoteKey
+import com.example.common.entities.MovieEntity
+import com.example.common.entities.MovieEntityRemoteKey
 import io.reactivex.Single
 
 interface ILocalDataSource {

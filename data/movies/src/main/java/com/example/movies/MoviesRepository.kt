@@ -3,8 +3,8 @@ package com.example.movies
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.example.common.entities.MovieEntity
 import com.example.database.ILocalDataSource
-import com.example.database.entities.MovieEntity
 import com.example.movies.paging.MoviesRemoteMediator
 import com.example.network.INetworkDataSource
 import javax.inject.Inject
