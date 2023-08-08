@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.common.model.Movie
 
+private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original"
 @Entity(tableName = "movies")
 data class MovieEntity(
     val title: String?,
@@ -19,8 +20,8 @@ data class MovieEntity(
         return Movie(
             title ?:"",
             releaseDate ?: "",
-            overview ?: "",
-            posterUrl ?: ""
+            "$IMAGE_BASE_URL$posterUrl",
+            overview ?: ""
         )
     }
 }
