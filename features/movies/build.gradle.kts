@@ -89,4 +89,7 @@ dependencies {
     implementation(libs.rxandroid)
     // rxJava
     implementation(libs.rxjava)
+
+    // ui automator
+    androidTestImplementation(libs.uiautomator)
 }

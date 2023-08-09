@@ -107,8 +107,11 @@ dependencyResolutionManagement {
             library("paging-guava", "androidx.paging","paging-guava").versionRef("pagingVersion")
             // Paging for Compose
             library("paging-compose", "androidx.paging:paging-compose:3.2.0")
-
+            // Paging test
             library("paging-testing", "androidx.paging:paging-testing:3.2.0")
+            
+            // Ui Automator
+            library("uiautomator", "androidx.test.uiautomator:uiautomator:2.3.0-alpha03")
         }
     }
 }
