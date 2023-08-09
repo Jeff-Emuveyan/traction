@@ -8,6 +8,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.reactivex.Single
 import javax.inject.Inject
 
 class RepositoryModuleImpl @Inject constructor (private val repository: MoviesRepository):
@@ -15,6 +16,10 @@ class RepositoryModuleImpl @Inject constructor (private val repository: MoviesRe
 
     override fun getMovies(): Pager<Int, MovieEntity> {
         return repository.getMovies()
+    }
+
+    override fun get(movieTitle: String): Single<MovieEntity?> {
+        return repository.get(movieTitle)
     }
 }
 

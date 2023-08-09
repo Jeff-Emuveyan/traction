@@ -30,6 +30,10 @@ class LocalDataSourceModuleImpl @Inject constructor(private val localDataSource:
         return localDataSource.getAll()
     }
 
+    override fun get(movieTitle: String): Single<MovieEntity?> {
+        return localDataSource.get(movieTitle)
+    }
+
     override fun getRemoteKey(pageNumber: Int): Single<MovieEntityRemoteKey> {
         return localDataSource.getRemoteKey(pageNumber)
     }

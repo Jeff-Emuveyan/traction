@@ -7,6 +7,7 @@ import com.example.common.entities.MovieEntity
 import com.example.database.ILocalDataSource
 import com.example.movies.paging.MoviesRemoteMediator
 import com.example.network.INetworkDataSource
+import io.reactivex.Single
 import javax.inject.Inject
 
 class MoviesRepository @Inject constructor(
@@ -22,4 +23,7 @@ class MoviesRepository @Inject constructor(
     }
 
     override fun getMovies(): Pager<Int, MovieEntity> = pager
+    override fun get(movieTitle: String): Single<MovieEntity?> {
+        return localSource.get(movieTitle)
+    }
 }

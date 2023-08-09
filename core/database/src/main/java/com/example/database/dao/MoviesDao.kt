@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.common.entities.MovieEntity
+import io.reactivex.Single
 
 @Dao
 interface MoviesDao {
@@ -15,6 +16,9 @@ interface MoviesDao {
 
     @Query("SELECT * FROM movies")
     fun getAll(): PagingSource<Int, MovieEntity>
+
+    @Query("SELECT * FROM movies WHERE title LIKE :movieTitle")
+    fun get(movieTitle: String): Single<MovieEntity?>
 
     @Query("DELETE FROM movies")
     fun deleteAll()

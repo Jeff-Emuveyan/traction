@@ -24,6 +24,10 @@ class LocalDataSource @Inject constructor(private val appDatabase: AppDatabase):
         return appDatabase.moviesDao().getAll()
     }
 
+    override fun get(movieTitle: String): Single<MovieEntity?> {
+        return appDatabase.moviesDao().get(movieTitle)
+    }
+
     override fun getRemoteKey(pageNumber: Int): Single<MovieEntityRemoteKey> {
        return appDatabase.moviesRemoteKeyDao().getRemoteKey(pageNumber)
     }

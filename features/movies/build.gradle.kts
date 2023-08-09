@@ -79,4 +79,9 @@ dependencies {
 
     // Paging compose
     implementation(libs.paging.compose)
+
+    // rxAndroid
+    implementation(libs.rxandroid)
+    // rxJava
+    implementation(libs.rxjava)
 }

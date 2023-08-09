@@ -15,6 +15,8 @@ interface ILocalDataSource {
 
     fun getAll(): PagingSource<Int, MovieEntity>
 
+    fun get(movieTitle: String): Single<MovieEntity?>
+
     fun getRemoteKey(pageNumber: Int): Single<MovieEntityRemoteKey>
 
     fun deleteAll()
