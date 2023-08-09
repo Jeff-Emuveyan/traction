@@ -11,6 +11,11 @@ data class MovieEntity(
     val overview: String?,
     val posterUrl: String?,
     val releaseDate: String?,
+    val backdropPath: String?,
+    val language: String?,
+    val popularity: Double?,
+    val voteAverage: Double?,
+    val voteCount: Int?,
     val pageNumber: Int,
     @PrimaryKey(autoGenerate = true)
     val index:Int = 0,
@@ -21,7 +26,12 @@ data class MovieEntity(
             title ?:"",
             releaseDate ?: "",
             "$IMAGE_BASE_URL$posterUrl",
-            overview ?: ""
+            overview ?: "",
+             "$IMAGE_BASE_URL$backdropPath"?: "",
+            language ?: "",
+            popularity ?: 0.0,
+            voteAverage ?: 0.0,
+            voteCount ?: 0
         )
     }
 }

@@ -10,5 +10,15 @@ data class MovieResponse(
     @SerializedName("poster_path")
     val posterUrl: String?,
     @SerializedName("release_date")
-    val releaseDate: String?
+    val releaseDate: String?,
+    @SerializedName("backdrop_path")
+    val backdropPath: String?,
+    @SerializedName("original_language")
+    val language: String?,
+    @SerializedName("popularity")
+    val popularity: Double?,
+    @SerializedName("vote_average")
+    val voteAverage: Double?,
+    @SerializedName("vote_count")
+    val voteCount: Int?
 )

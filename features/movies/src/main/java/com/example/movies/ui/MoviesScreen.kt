@@ -1,12 +1,23 @@
 package com.example.movies.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -35,6 +46,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -87,7 +100,7 @@ internal fun MoviesScreen(
                 value = text,
                 onValueChange = { text = it },
                 singleLine = true,
-                label = { Text("Search by title") }
+                label = { Text(stringResource(id = R.string.search_message)) }
             )
             MovieList(listState = listState, list)
         }
@@ -109,6 +122,8 @@ internal fun MovieList(listState: LazyListState, lazyPagingItems: LazyPagingItem
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 internal fun Movie(@PreviewParameter(MoviePreviewParameter::class) movie: Movie) {
+    var openMovieDetails by remember { mutableStateOf(false) }
+
     Column {
         AsyncImage(
             contentScale = ContentScale.FillWidth,
@@ -121,10 +136,54 @@ internal fun Movie(@PreviewParameter(MoviePreviewParameter::class) movie: Movie)
             Text(text = movie.title, style = MaterialTheme.typography.titleLarge )
             Text(text = movie.releaseDate)
             Text(text = movie.overview, textAlign = TextAlign.Justify, modifier = Modifier.padding(top = 8.0.dp))
-
-            Divider(thickness = 1.dp, modifier = Modifier.padding(8.0.dp))
+            MovieDetails(openMovieDetails, movie)
+            SeeMoreText { openMovieDetails = !openMovieDetails }
         }
     }
+}
+
+@Composable
+internal fun MovieDetails(open: Boolean, movie: Movie) {
+
+    AnimatedVisibility(
+        visible = open,
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
+        Column(modifier = Modifier.padding(top = 12.0.dp)) {
+            AsyncImage(
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxWidth(),
+                model = movie.backdropPath,
+                contentDescription = movie.title,
+                placeholder = painterResource(R.drawable.image_24)
+            )
+            Column(Modifier.padding(top = 8.0.dp)) {
+                Text(text = movie.title)
+                Text(text = "${stringResource(id = R.string.vote_avg)} ${movie.voteAverage}")
+                Text(text = "${stringResource(id = R.string.popularity)} ${movie.popularity}")
+                Text(text = "${stringResource(id = R.string.language)} ${movie.language}")
+            }
+        }
+    }
+}
+
+@Composable
+internal fun SeeMoreText(onclick: () -> Unit) {
+    var open by remember { mutableStateOf(false) }
+
+    Spacer(modifier = Modifier.height(8.0.dp))
+
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        Text(text = if (open) stringResource(id = R.string.close) else stringResource(id = R.string.see_more),
+            modifier = Modifier.clickable(onClick = {
+                open = !open
+                onclick()
+        }), color = Color(0xFF7695F0)
+        )
+    }
+
+    Spacer(modifier = Modifier.height(28.0.dp))
 }
 
 @Composable

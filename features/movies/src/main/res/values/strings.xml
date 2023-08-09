@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">traction</string>
     <string name="error_message">Network Error, tap here to try again</string>
+    <string name="search_message">Search by title</string>
+    <string name="see_more">See more</string>
+    <string name="close">Close</string>
+    <string name="popularity">Popularity: </string>
+    <string name="vote_avg">Vote Avg.: </string>
+    <string name="language">Language: </string>
 </resources>
