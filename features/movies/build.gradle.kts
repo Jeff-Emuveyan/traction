@@ -79,6 +79,11 @@ dependencies {
 
     // Paging compose
     implementation(libs.paging.compose)
+    // Paging runtime
+    implementation(libs.paging.runtime)
+    // Paging test
+    testImplementation(libs.paging.common)
+    testImplementation(libs.paging.testing)
 
     // rxAndroid
     implementation(libs.rxandroid)

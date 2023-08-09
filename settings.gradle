@@ -23,7 +23,7 @@ dependencyResolutionManagement {
             version("rxandroidVersion", "2.0.1")
             version("rxjavaVersion", "2.1.7")
             version("roomVersion", "2.5.2")
-            version("pagingVersion", "3.1.1")
+            version("pagingVersion", "3.2.0")
 
             // androidx core
             library("androidx.core", "androidx.core:core-ktx:1.9.0")
@@ -107,6 +107,8 @@ dependencyResolutionManagement {
             library("paging-guava", "androidx.paging","paging-guava").versionRef("pagingVersion")
             // Paging for Compose
             library("paging-compose", "androidx.paging:paging-compose:3.2.0")
+
+            library("paging-testing", "androidx.paging:paging-testing:3.2.0")
         }
     }
 }
