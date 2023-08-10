@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
  * for investigating your app's performance.
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleStartupBenchmark {
+class TractionStartupBenchmark {
     @get:Rule
     val benchmarkRule = MacrobenchmarkRule()
 
