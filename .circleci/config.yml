@@ -17,7 +17,9 @@ jobs:
     steps:
       - run:
           name: chmod permissions
-          command: sudo chmod +x ./gradlew
+          command: |
+            sudo chmod +x ./gradlew
+            ./gradlew androidDependencies
 
   unit-test: # A job to run unit test (Note: The name of the job can be anything you want it to be)
     executor:
