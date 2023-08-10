@@ -10,6 +10,12 @@ orbs:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
 
+  gradle-fix:
+    steps:
+      - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
+
   unit-test: # A job to run unit test (Note: The name of the job can be anything you want it to be)
     executor:
       name: android/android-machine
@@ -54,5 +60,6 @@ jobs:
 workflows:
   test-and-build:
     jobs:
+      - gradle-fix
       - unit-test
       - release-build
