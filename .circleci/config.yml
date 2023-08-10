@@ -11,6 +11,9 @@ orbs:
 jobs:
 
   gradle-fix:
+    executor:
+      name: android/android-machine
+      resource-class: large
     steps:
       - run:
           name: chmod permissions
