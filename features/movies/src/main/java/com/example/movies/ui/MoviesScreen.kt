@@ -59,7 +59,6 @@ import com.example.movies.model.SearchResult
 import com.example.movies.util.MoviePreviewParameter
 import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MoviesScreen(viewModel: MoviesScreenViewModel = hiltViewModel()) {
 
@@ -67,36 +66,24 @@ fun MoviesScreen(viewModel: MoviesScreenViewModel = hiltViewModel()) {
     val listOfMovies = viewModel.getMovies().collectAsLazyPagingItems()
     val searchResult = viewModel.searchResult.collectAsStateWithLifecycle().value
 
-    val refreshing = false
-    val refreshingState = rememberPullRefreshState(refreshing, { })
-
-    MoviesScreen(listOfMovies,
+    MoviesScreen(
+        listOfMovies,
         searchResult,
         listState,
-        refreshing,
-        refreshingState,
-        { viewModel.search(it) },
-        {}
-    )
+    ) { viewModel.search(it) }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun MoviesScreen(
     list: LazyPagingItems<Movie>,
     searchResult: SearchResult,
     listState: LazyListState,
-    refreshing: Boolean,
-    refreshingState: PullRefreshState,
-    onSearch:(String) -> Unit,
-    onRetry:() -> Unit) {
+    onSearch:(String) -> Unit) {
 
-    Box(modifier = Modifier.pullRefresh(refreshingState)) {
+    Box {
 
         var movieSearchTitle by remember { mutableStateOf("") }
         var isSearching by remember { mutableStateOf(false) }
-
-        PullRefreshIndicator(refreshing, refreshingState, modifier = Modifier.align(Alignment.TopCenter))
 
         Column {
             if (isSearching) {
@@ -214,22 +201,4 @@ internal fun SeeMoreText(onclick: () -> Unit) {
     }
 
     Spacer(modifier = Modifier.height(28.0.dp))
-}
-
-@Composable
-internal fun ErrorButton(onRetry:() -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        ExtendedFloatingActionButton(
-            onClick = onRetry,
-            backgroundColor = MaterialTheme.colorScheme.error,
-            icon = { Icon(Icons.Filled.Refresh, stringResource(id = R.string.error_message)) },
-            text = { Text(text = stringResource(id = R.string.error_message)) },
-        )
-    }
 }
