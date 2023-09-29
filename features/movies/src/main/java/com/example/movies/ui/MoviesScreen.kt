@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,6 +28,7 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.PullRefreshState
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.Card
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -87,7 +89,9 @@ internal fun MoviesScreen(
 
         Column {
             if (isSearching) {
-                LinearProgressIndicator(modifier = Modifier.padding(8.0.dp).fillMaxWidth())
+                LinearProgressIndicator(modifier = Modifier
+                    .padding(8.0.dp)
+                    .fillMaxWidth())
             }
             OutlinedTextField(
                 colors = OutlinedTextFieldDefaults.colors(
@@ -142,13 +146,15 @@ internal fun Movie(@PreviewParameter(MoviePreviewParameter::class) movie: Movie)
     var openMovieDetails by remember { mutableStateOf(false) }
 
     Column {
-        AsyncImage(
-            contentScale = ContentScale.FillWidth,
-            modifier = Modifier.fillMaxWidth(),
-            model = movie.posterUrl,
-            contentDescription = movie.title,
-            placeholder = painterResource(R.drawable.image_24)
-        )
+        Card(shape = MaterialTheme.shapes.medium) {
+            AsyncImage(
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxWidth(),
+                model = movie.posterUrl,
+                contentDescription = movie.title,
+                placeholder = painterResource(R.drawable.image_24)
+            )
+        }
         Column(modifier = Modifier.padding(8.0.dp)) {
             Text(text = movie.title, style = MaterialTheme.typography.titleLarge )
             Text(text = movie.releaseDate)
