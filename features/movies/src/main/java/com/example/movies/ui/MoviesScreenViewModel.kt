@@ -20,7 +20,7 @@ class MoviesScreenViewModel @Inject constructor(
     private val getMovies: IGetMoviesUseCase,
     private val getMovie: IGetMovieUseCase): ViewModel() {
 
-    private val _searchResult = MutableStateFlow<SearchResult>(SearchResult.NoResult)
+    private val _searchResult = MutableStateFlow<SearchResult>(SearchResult.NoResult(""))
     val searchResult = _searchResult.asStateFlow()
 
     fun getMovies() = getMovies.invoke()
@@ -31,16 +31,16 @@ class MoviesScreenViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                  processResult(it)
+                  processResult(movieTitle, it)
                 }, {
-                   processResult(null)
+                   processResult(movieTitle, null)
                 })
         )
     }
 
-    private fun processResult(movie: Movie?) {
+    private fun processResult(title: String, movie: Movie?) {
         if (movie == null) {
-            _searchResult.value = SearchResult.NoResult
+            _searchResult.value = SearchResult.NoResult(title)
         } else {
             _searchResult.value = SearchResult.Result(movie)
         }

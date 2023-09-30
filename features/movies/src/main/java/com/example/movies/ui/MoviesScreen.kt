@@ -1,5 +1,6 @@
 package com.example.movies.ui
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -59,36 +60,28 @@ import com.example.common.model.Movie
 import com.example.movies.R
 import com.example.movies.model.SearchResult
 import com.example.movies.util.MoviePreviewParameter
+import com.example.movies.util.MoviesScreenState
+import com.example.movies.util.rememberMoviesScreenState
 import kotlinx.coroutines.delay
 
 @Composable
 fun MoviesScreen(viewModel: MoviesScreenViewModel = hiltViewModel()) {
 
-    val listState = rememberLazyListState()
     val listOfMovies = viewModel.getMovies().collectAsLazyPagingItems()
     val searchResult = viewModel.searchResult.collectAsStateWithLifecycle().value
-
-    MoviesScreen(
-        listOfMovies,
-        searchResult,
-        listState,
-    ) { viewModel.search(it) }
+    val state = rememberMoviesScreenState(listOfMovies, searchResult)
+    MoviesScreen(state) { viewModel.search(it) }
 }
 
 @Composable
 internal fun MoviesScreen(
-    list: LazyPagingItems<Movie>,
-    searchResult: SearchResult,
-    listState: LazyListState,
+    moviesScreenState: MoviesScreenState,
     onSearch:(String) -> Unit) {
 
     Box {
 
-        var movieSearchTitle by remember { mutableStateOf("") }
-        var isSearching by remember { mutableStateOf(false) }
-
         Column {
-            if (isSearching) {
+            if (moviesScreenState.isSearching) {
                 LinearProgressIndicator(modifier = Modifier
                     .padding(8.0.dp)
                     .fillMaxWidth())
@@ -99,19 +92,19 @@ internal fun MoviesScreen(
                     unfocusedBorderColor = Color.White,
                 ),
                 modifier = Modifier.fillMaxWidth(),
-                value = movieSearchTitle,
-                onValueChange = { movieSearchTitle = it },
+                value = moviesScreenState.movieSearchTitle,
+                onValueChange = { moviesScreenState.movieSearchTitle = it },
                 singleLine = true,
                 label = { Text(stringResource(id = R.string.search_message)) }
             )
-            MovieList(listState = listState, list, searchResult)
+            MovieList(listState = moviesScreenState.listState, moviesScreenState.list, moviesScreenState.searchResult)
         }
 
-        LaunchedEffect(key1 = movieSearchTitle) {
-            isSearching = true
+        LaunchedEffect(key1 = moviesScreenState.movieSearchTitle) {
+            moviesScreenState.isSearching = true
             delay(2000) // add debounce to the coroutine scope
-            onSearch(movieSearchTitle)
-            isSearching = false
+            onSearch(moviesScreenState.movieSearchTitle)
+            moviesScreenState.isSearching = false
         }
     }
 }
@@ -130,7 +123,7 @@ internal fun MovieList(
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
             Movie(movie)
         }
-    } else if (endlessListOfMoviesAvailable) {
+    } else {
         LazyColumn(state = listState) {
             items(count = lazyPagingItems.itemCount) { index ->
                 val item = lazyPagingItems[index]
@@ -202,7 +195,7 @@ internal fun SeeMoreText(onclick: () -> Unit) {
             modifier = Modifier.clickable(onClick = {
                 open = !open
                 onclick()
-        }), color = Color(0xFF7695F0)
+            }), color = Color(0xFF7695F0)
         )
     }
 
