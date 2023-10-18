@@ -1,4 +1,4 @@
-# Traction Take-Home Assignment solution
+# Traction
 
 *Ensure you have the latest version of Android studio (Android Studio Flamingo | 2022.2.1 preferrably) before cloning this repository.*
 
