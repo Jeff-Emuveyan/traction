@@ -45,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -91,7 +92,7 @@ internal fun MoviesScreen(
                     focusedBorderColor = Color.White,
                     unfocusedBorderColor = Color.White,
                 ),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("searchTextField"),
                 value = moviesScreenState.movieSearchTitle,
                 onValueChange = { moviesScreenState.movieSearchTitle = it },
                 singleLine = true,

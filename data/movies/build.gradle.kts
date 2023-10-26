@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.data.movies"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24

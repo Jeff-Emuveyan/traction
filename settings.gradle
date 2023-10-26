@@ -111,7 +111,7 @@ dependencyResolutionManagement {
             library("paging-testing", "androidx.paging:paging-testing:3.2.0")
             
             // Ui Automator
-            library("uiautomator", "androidx.test.uiautomator:uiautomator:2.3.0-alpha03")
+            library("uiautomator", "androidx.test.uiautomator:uiautomator:2.3.0-alpha04")
         }
     }
 }
