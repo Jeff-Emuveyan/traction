@@ -3,7 +3,6 @@ package com.example.movies
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
@@ -11,7 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-private const val TIME_OUT = 5000L
+private const val TIME_OUT = 5_000L
 
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 18)
@@ -27,7 +26,7 @@ class MoviesScreenUiAutomationTest {
 
         // Use shell command to launch the app:
         // https://falsinsoft.blogspot.com/2015/05/launch-app-from-android-shell-terminal.html#:~:text=If%20you%20want%20to%20launch,interface%20to%20the%20system%20ActivityManager
-        getInstrumentation().uiAutomation.executeShellCommand("am start -n com.example.traction/com.example.traction.ui.MainActivity")
+        device.executeShellCommand("am start -n com.example.traction/com.example.traction.ui.MainActivity")
     }
 
     @Test
@@ -43,7 +42,7 @@ class MoviesScreenUiAutomationTest {
         // This will cause all your tests will fail before the actual UI composables have a chance to be drawn on the screen.
 
         // So, the first thing to do is wait until we are sure that the composable we want to test for is visible:
-        device.wait(Until.findObject(By.res("searchTextField")), 5_000)
+        device.wait(Until.findObject(By.res("searchTextField")), TIME_OUT)
 
         // Now, we are free to find the text field:
         val textField = device.findObject(By.res("searchTextField"))
