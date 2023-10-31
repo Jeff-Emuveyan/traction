@@ -39,10 +39,11 @@ class MoviesScreenUiAutomationTest {
         // immediately the first UI of the app appears. Now, since it is the splash/blank screen that appears first,
         // UIAutomator will run all your tests on that splash/blank screen.
 
-        // This will cause all your tests will fail before the actual UI composables have a chance to be drawn on the screen.
+        // This will cause all your tests to run and fail before the actual expected UI composables
+        // have a chance to be drawn on the screen.
 
         // So, the first thing to do is wait until we are sure that the composable we want to test for is visible:
-        device.wait(Until.findObject(By.res("searchTextField")), TIME_OUT)
+        device.wait(Until.hasObject(By.res("searchTextField" )), TIME_OUT)
 
         // Now, we are free to find the text field:
         val textField = device.findObject(By.res("searchTextField"))
